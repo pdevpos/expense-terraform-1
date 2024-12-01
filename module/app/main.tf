@@ -22,7 +22,7 @@ resource "null_resource" "provisioner"{
       host     = aws_instance.resource.public_ip
     }
     inline = [
-           "sudo pip3.11 install ansible -y",
+           "sudo pip3.11 install ansible",
            "ansible-pull -i localhost, -U https://github.com/pdevpos/learn-ansible.git expense.yml -e env=${var.env} -e component_name=${var.component}"
     ]
   }
