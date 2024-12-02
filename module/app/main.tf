@@ -24,7 +24,7 @@ resource "null_resource" "provisioner"{
       port     = 22
     }
     inline = [
-           "sudo pip3.11 install ansible"
+           "sudo dnf install ansible -y"
 #            "ansible-pull -i localhost, -U https://github.com/pdevpos/learn-ansible.git expense.yml -e env=${var.env} -e component_name=${var.component}"
     ]
   }
