@@ -23,8 +23,9 @@ resource "null_resource" "provisioner"{
     }
     inline = [
            "sudo pip3.11 install ansible",
-           "sudo dnf install nginx -y",
-           "sudo systemctl start nginx"
+#            "sudo dnf install nginx -y",
+#            "sudo systemctl start nginx"
+      "ansible-pull -i localhost, -U https://github.com/pdevpos/learn-ansible.git expense.yml -e env=dev -e component_name=frontend"
     ]
   }
 }
