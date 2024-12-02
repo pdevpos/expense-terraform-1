@@ -16,14 +16,15 @@ resource "null_resource" "provisioner"{
   provisioner "remote-exec" {
     connection {
       type     = "ssh"
-      user     = "ec2-user"
-      password = "DevOps321"
+      user     = var.ssh_user
+      password = var.ssh_password
       host     = aws_instance.component.public_ip
       port     = 22
     }
     inline = [
-           "sudo dnf install ansible -y",
-           "sudo systemctl start ansible"
+           "sudo pip3.11 install ansible",
+           "sudo dnf install nginx -y",
+           "sudo systemctl start nginx"
     ]
   }
 }
