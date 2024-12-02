@@ -1,19 +1,17 @@
-resource "aws_instance" "resource" {
-  ami = data.aws_ami.ami.image_id
+resource "aws_instance" "component" {
+  ami           = data.aws_ami.ami.image_id
   instance_type = var.instance_type
   instance_market_options {
     market_type = "spot"
     spot_options {
       instance_interruption_behavior = "stop"
-      spot_instance_type = "persistent"
+      spot_instance_type             = "persistent"
     }
   }
-
   tags = {
-    Name = "${var.env}-${var.component}"
+    Name = var.component
   }
 }
-
 # resource "null_resource" "provisioner"{
 #   provisioner "remote-exec" {
 #     connection {
