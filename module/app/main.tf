@@ -12,21 +12,21 @@ resource "aws_instance" "component" {
     Name = var.component
   }
 }
-# resource "null_resource" "provisioner"{
-#   provisioner "remote-exec" {
-#     connection {
-#       type     = "ssh"
-#       user     = var.ssh_user
-#       password = var.ssh_password
-#       host     = aws_instance.resource.public_ip
-#       port     = 22
-#     }
-#     inline = [
-#            "sudo dnf install ansible -y",
-#            "sudo systemctl start ansible"
-#     ]
-#   }
-# }
+resource "null_resource" "provisioner"{
+  provisioner "remote-exec" {
+    connection {
+      type     = "ssh"
+      user     = var.ssh_user
+      password = var.ssh_password
+      host     = aws_instance.component.public_ip
+      port     = 22
+    }
+    inline = [
+           "sudo dnf install ansible -y",
+           "sudo systemctl start ansible"
+    ]
+  }
+}
 resource "aws_route53_record" "route53" {
   name              = "${var.env}-${var.component}"
   type              = "A"
