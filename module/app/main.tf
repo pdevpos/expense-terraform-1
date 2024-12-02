@@ -1,5 +1,6 @@
 resource "aws_instance" "resource" {
   ami = data.aws_ami.ami.image_id
+  instance_type = var.instance_type
   instance_market_options {
     market_type = "spot"
     spot_options {
@@ -7,7 +8,7 @@ resource "aws_instance" "resource" {
       spot_instance_type = "persistent"
     }
   }
-  instance_type = var.instance_type
+
   tags = {
     Name = "${var.env}-${var.component}"
   }
@@ -20,6 +21,7 @@ resource "null_resource" "provisioner"{
       user     = var.ssh_user
       password = var.ssh_password
       host     = aws_instance.resource.public_ip
+      port     = 22
     }
     inline = [
            "sudo pip3.11 install ansible"
