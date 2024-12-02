@@ -32,5 +32,5 @@ resource "aws_route53_record" "route53" {
   type              = "A"
   zone_id           = var.zone_id
   ttl               = 50
-  records           = [aws_instance.resource.private_ip]
+  records           = [aws_instance.component.private_ip]
 }
